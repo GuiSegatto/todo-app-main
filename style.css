@@ -10,8 +10,6 @@
 }
 
 html {
-    font-size: 18px;
-
 }
 
 body {
@@ -23,7 +21,10 @@ body {
 
 .container {
     background-color: hsl(235, 24%, 19%);
+    border-radius: 5px;
+    box-shadow: 0px 10px 50px 18px rgba(0,0,0,0.2);
 }
+
 
 
 
@@ -36,19 +37,18 @@ header {
 
 h1 {
     color: hsl(0, 100%, 100%);
-    letter-spacing: 0.75rem;
-    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+    font-size: 1.75rem;
 }
+
+
 
 
 
 /* NEW TODO INPUT */
 .new-todo {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     margin-bottom: 1rem;
-
-    border-radius: 5px;
-
 
     display: flex;
     align-items: center;
@@ -76,4 +76,104 @@ h1 {
 
     border-radius: 50%;
     border: solid 1px hsl(237, 14%, 26%);
+}
+
+
+
+
+
+/* TODO LIST */
+
+
+.todo-list li {
+    list-style: none;
+    font-size: 0.813rem;
+    color: hsl(234, 39%, 85%);
+    align-items: center;
+    display: flex;
+
+    padding: 1rem;
+    border-bottom: 1px solid hsl(237, 14%, 26%);
+
+}
+
+.todo-list li::before {
+    content: " ";
+    display: inline-block;
+    margin-right: 0.75rem;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border-radius: 50%;
+    border: solid 1px hsl(237, 14%, 26%);
+/* 
+    background: rgb(87,221,255);
+    background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%); */
+}
+
+
+
+
+
+/* list footer */
+
+.list-footer {
+    font-size: 0.813rem;
+    color: hsl(233, 14%, 35%);
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.list-footer button {
+    background-color: transparent;
+    border: none;
+
+    color: hsl(233, 14%, 35%);
+}
+
+
+
+
+
+/* SHOW STATUS */
+.show-status {
+    padding: 1rem;
+    color: hsl(233, 14%, 35%);
+
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+}
+
+.show-status input {
+    display: none;
+}
+.show-status input:checked + label{
+    color: hsl(220, 98%, 61%);
+}
+
+.show-status label {
+    margin: 0 0.5rem;
+}
+
+
+
+
+
+/* REORDER MESSAGE */
+
+.reorder-msg{
+    margin-top: 3rem;
+
+    text-align: center;
+    color: hsl(233, 14%, 35%);
+    font-size: 0.813rem;
+    font-weight: 700;
+    
 }
