@@ -88,6 +88,7 @@ h1 {
     list-style: none;
     font-size: 0.813rem;
     color: hsl(234, 39%, 85%);
+    
     align-items: center;
     display: flex;
 
@@ -111,7 +112,10 @@ h1 {
     background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%); */
 }
 
-
+.remove-button {
+    margin-left: auto;
+    width: 0.813rem;
+}
 
 
 
