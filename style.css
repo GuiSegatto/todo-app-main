@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+
+/* GLOBAL STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+html {
+    font-size: 18px;
+
+}
+
+body {
+    background-image: url(./images/bg-mobile-dark.jpg);
+    background-repeat: no-repeat;
+    background-color: hsl(235, 21%, 11%);
+    margin: 1.25rem;
+}
+
+.container {
+    background-color: hsl(235, 24%, 19%);
+}
+
+
+
+/* HEADER STYLES  */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+}
+
+h1 {
+    color: hsl(0, 100%, 100%);
+    letter-spacing: 0.75rem;
+    font-size: 1.5rem;
+}
+
+
+
+/* NEW TODO INPUT */
+.new-todo {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+
+    border-radius: 5px;
+
+
+    display: flex;
+    align-items: center;
+}
+
+.new-todo input {
+    padding: 0 0.5rem;
+    width: 90%;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+        
+    color: hsl(234, 39%, 85%);
+    caret-color: hsl(220, 98%, 61%);
+}
+
+.new-todo::before {
+    content: " ";
+    display: inline-block;
+    margin-right: 0.325rem;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border-radius: 50%;
+    border: solid 1px hsl(237, 14%, 26%);
+}

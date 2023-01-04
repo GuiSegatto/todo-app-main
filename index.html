@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
   <title>Frontend Mentor | Todo app</title>
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -19,12 +20,11 @@
   </header>
 
   <main>
-    <div class="new-todo">
-      <div class="circle">O</div>
+    <div class="new-todo container">
       <input type="text" id="" placeholder="Create a new todo...">
     </div>
 
-    <div class="todo">
+    <div class="todo container">
       <ul id="todoList">
         <li>Hit the gym</li>
         <li class="checked">Pay bills</li>
@@ -34,13 +34,13 @@
         <li>Organize office</li>
       </ul>
 
-      <div class="list-footer">
+      <div class="list-footer" >
         <p><span id="itemsLeft">0</span> items left</p>
         <button>Clear Completed</button>
       </div>
     </div>
 
-    <div class="show-status">
+    <div class="show-status container">
       <input type="radio" name="status" id="showAll" value="all">
       <label for="showAll">All</label>
       <input type="radio" name="status" id="showActive" value="active">
