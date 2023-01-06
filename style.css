@@ -91,13 +91,47 @@ h1 {
     
     align-items: center;
     display: flex;
+    justify-content: space-between;
+
+    width: 100%;
 
     padding: 1rem;
     border-bottom: 1px solid hsl(237, 14%, 26%);
 
 }
 
-.todo-list li::before {
+.todo-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.circle {
+    width: 1.5rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    border: solid 1px hsl(237, 14%, 26%);
+}
+
+.circle.checked {
+    background: rgb(87,221,255);
+    background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%);
+}
+
+.check-icon{
+    background-image: url(./images/icon-check.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.25rem;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+
+
+/* .todo-list li::before {
     content: " ";
     display: inline-block;
     margin-right: 0.75rem;
@@ -110,7 +144,9 @@ h1 {
 /* 
     background: rgb(87,221,255);
     background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%); */
-}
+
+
+ */
 
 .remove-button {
     margin-left: auto;
