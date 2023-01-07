@@ -23,13 +23,13 @@ for (i = 0; i < removeBtn.length; i++) {
 }
 
 // Create the check circle before the todo name
- for (i = 0; i < li.length; i++) {
+for (i = 0; i < li.length; i++) {
     let circle = document.createElement("div")
     circle.classList.add("circle")
     let wrapper = li[i].parentElement
-    wrapper.insertBefore(circle, wrapper.firstChild)   
-  
-}    
+    wrapper.insertBefore(circle, wrapper.firstChild)
+
+}
 
 
 
@@ -138,12 +138,12 @@ ul.addEventListener('click', function (event) {
 
 
 
-}, false);
+});
 
 
 // Count how many items on the list are left
-let completed = document.getElementById("todoList").getElementsByClassName("complete")
-let total = document.getElementById("todoList").getElementsByTagName("li")
+const completed = document.getElementById("todoList").getElementsByClassName("complete")
+const total = document.getElementById("todoList").getElementsByTagName("li")
 
 function countItemsLeft() {
     left = total.length - completed.length
@@ -157,7 +157,7 @@ function updateItems() {
 }
 updateItems()
 
-// Looks like you have no todo on your list
+// Looks like you have no todo on your list message
 function countTodo() {
     let message = document.getElementById("noTodoMsg")
     let container = document.querySelector(".msg-container")
@@ -167,10 +167,40 @@ function countTodo() {
     } else if (total.length === 6) {
         container.style.display = "none"
         ul.style.border = "0"
-    } 
+    }
     else {
         container.style.display = "flex"
         message.innerText = "Looks like your To Do List is Empty..."
         ul.removeAttribute("style")
     }
 }
+
+// Navigation in footer
+
+const statusDiv = document.querySelector('#status')
+statusDiv.addEventListener('change', function () {
+    let value = document.querySelector('input[name="status"]:checked').value;
+    if (value === 'completed') {
+        for (const items of total) {
+            let wrapper = items.parentNode
+            wrapper.classList.remove('hide')
+            if (!items.classList.contains('complete')) {
+                wrapper.classList.add('hide')
+            }
+        }
+    }
+    else if (value === 'active') {
+        for (const items of total) {
+            let wrapper = items.parentNode
+            wrapper.classList.remove('hide')
+            if (items.classList.contains('complete')) {
+                wrapper.classList.add('hide')
+            }
+        }
+    } else {
+        for (const items of total) {
+            let wrapper = items.parentNode
+            wrapper.classList.remove('hide')
+        }
+    }
+})
