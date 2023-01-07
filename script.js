@@ -176,7 +176,6 @@ function countTodo() {
 }
 
 // Navigation in footer
-
 const statusDiv = document.querySelector('#status')
 statusDiv.addEventListener('change', function () {
     let value = document.querySelector('input[name="status"]:checked').value;
@@ -201,6 +200,18 @@ statusDiv.addEventListener('change', function () {
         for (const items of total) {
             let wrapper = items.parentNode
             wrapper.classList.remove('hide')
+        }
+    }
+})
+
+// Clear all todos button
+const clearBtn = document.getElementById("clearBtn")
+clearBtn.addEventListener('click', function () {
+    check = window.confirm("Are you sure you wanna clear your completed todos?");
+    if (check === true)
+    for (let i = total.length -1; i >= 0; i--) {
+        if (total[i].classList.contains('complete')){
+        total[i].parentNode.remove()        
         }
     }
 })
