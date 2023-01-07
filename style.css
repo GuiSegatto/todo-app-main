@@ -96,7 +96,6 @@ h1 {
     width: 100%;
 
     padding: 1rem;
-    border-bottom: 1px solid hsl(237, 14%, 26%);
 
 }
 
@@ -104,6 +103,7 @@ h1 {
     display: flex;
     align-items: center;
     padding: 0 1rem;
+    border-bottom: 1px solid hsl(237, 14%, 26%);
 }
 
 .circle {
@@ -113,7 +113,7 @@ h1 {
     border: solid 1px hsl(237, 14%, 26%);
 }
 
-.circle.checked {
+.circle.complete {
     background: rgb(87,221,255);
     background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%);
 }
@@ -125,7 +125,7 @@ h1 {
     height: 1.25rem;
 }
 
-.checked {
+.complete {
     text-decoration: line-through;
 }
 
@@ -146,7 +146,7 @@ h1 {
     background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%); */
 
 
- */
+
 
 .remove-button {
     margin-left: auto;
