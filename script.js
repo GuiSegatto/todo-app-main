@@ -18,17 +18,19 @@ for (i = 0; i < removeBtn.length; i++) {
         let todo = this.parentElement;
         let wrapper = todo.parentElement;
         wrapper.remove();
+        updateItems()
     }
 }
 
 // Create the check circle before the todo name
-/* for (i = 0; i < todoList.length; i++) {
-    circle = document.createElement("div");
-    circle.className = "circle";
-    li = todoList[i]
-    divPai = li.parentElement
-    divPai.insertBefore(circle, li)
-} */
+ for (i = 0; i < li.length; i++) {
+    let circle = document.createElement("div")
+    circle.classList.add("circle")
+    let wrapper = li[i].parentElement
+    wrapper.insertBefore(circle, wrapper.firstChild)   
+  
+}    
+
 
 
 // When press "enter" inside input execute newtodo function
@@ -80,8 +82,10 @@ function newTodo() {
             let todo = this.parentElement;
             let wrapper = todo.parentElement;
             wrapper.remove();
+            updateItems()
         }
     }
+    updateItems()
 }
 
 
@@ -95,7 +99,7 @@ ul.addEventListener('click', function (event) {
         event.target.classList.toggle('complete');
 
         let wrapper = event.target.parentNode;
-        wrapper.childNodes[0].classList.toggle('complete');
+        wrapper.childNodes[0].classList.toggle('checked');
 
         let checkIcon = document.createElement('div');
         checkIcon.classList.add('check-icon');
@@ -109,24 +113,27 @@ ul.addEventListener('click', function (event) {
                 wrapper.childNodes[0].removeChild(icon);
             }
         }
+        updateItems()
     }
 
     else if (event.target.classList.contains("circle")) {
-        event.target.classList.toggle('complete');
+        event.target.classList.toggle('checked');
         let wrapper = event.target.parentNode;
         wrapper.childNodes[1].classList.toggle('complete');
         let checkIcon = document.createElement('div');
         checkIcon.classList.add('check-icon')
         wrapper.childNodes[0].appendChild(checkIcon)
+        updateItems()
     }
 
     else if (event.target.classList.contains("check-icon")) {
         let circle = event.target.parentNode;
         let wrapper = circle.parentNode;
         wrapper.childNodes[1].classList.toggle('complete')
-        circle.classList.toggle('complete')
+        circle.classList.toggle('checked')
         let icon = wrapper.childNodes[0].childNodes[0]
         wrapper.childNodes[0].removeChild(icon)
+        updateItems()
     }
 
 
@@ -135,3 +142,35 @@ ul.addEventListener('click', function (event) {
 
 
 // Count how many items on the list are left
+let completed = document.getElementById("todoList").getElementsByClassName("complete")
+let total = document.getElementById("todoList").getElementsByTagName("li")
+
+function countItemsLeft() {
+    left = total.length - completed.length
+    return left
+}
+
+function updateItems() {
+    let itemsLeft = document.getElementById('itemsLeft')
+    itemsLeft.innerText = countItemsLeft()
+    countTodo()
+}
+updateItems()
+
+// Looks like you have no todo on your list
+function countTodo() {
+    let message = document.getElementById("noTodoMsg")
+    let container = document.querySelector(".msg-container")
+    if (total.length >= 1 && total.length !== 6) {
+        container.style.display = "none"
+        ul.removeAttribute("style")
+    } else if (total.length === 6) {
+        container.style.display = "none"
+        ul.style.border = "0"
+    } 
+    else {
+        container.style.display = "flex"
+        message.innerText = "Looks like your To Do List is Empty..."
+        ul.removeAttribute("style")
+    }
+}
