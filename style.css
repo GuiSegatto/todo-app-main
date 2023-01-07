@@ -12,16 +12,12 @@
 
 
 body {
-    background-image: url(./images/bg-mobile-dark.jpg);
     background-repeat: no-repeat;
-    background-color: hsl(235, 21%, 11%);
     margin: 1.25rem;
 }
 
 .container {
-    background-color: hsl(235, 24%, 19%);
     border-radius: 5px;
-    box-shadow: 0px 10px 50px 18px rgba(0,0,0,0.2);
 }
 
 
@@ -39,7 +35,10 @@ h1 {
     font-size: 1.75rem;
 }
 
-
+header img {
+    width: 1.25rem;
+    height: 1.25rem;
+}
 
 
 
@@ -59,8 +58,7 @@ h1 {
     background-color: transparent;
     border: none;
     outline: none;
-        
-    color: hsl(234, 39%, 85%);
+
     caret-color: hsl(220, 98%, 61%);
 }
 
@@ -73,7 +71,6 @@ h1 {
     height: 1.25rem;
 
     border-radius: 50%;
-    border: solid 1px hsl(237, 14%, 26%);
 }
 
 
@@ -84,7 +81,6 @@ h1 {
 
 ul {
     min-height: 17.25rem;
-    border-bottom: 1px solid hsl(237, 14%, 26%);
 }
 
 .msg-container {
@@ -101,14 +97,12 @@ ul {
     color: hsl(235, 19%, 35%);
     font-size: 0.813rem;
 
-    text-shadow: 0px 2px 5px rgba(0,0,0,0.4);
 }
 
 .todo-list li {
     list-style: none;
     font-size: 0.813rem;
-    color: hsl(234, 39%, 85%);
-    
+
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -123,10 +117,9 @@ ul {
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    border-bottom: 1px solid hsl(237, 14%, 26%);
-
 }
-.todo-wrapper.hide{
+
+.todo-wrapper.hide {
     display: none;
 }
 
@@ -134,15 +127,14 @@ ul {
     width: 1.5rem;
     height: 1.4rem;
     border-radius: 50%;
-    border: solid 1px hsl(237, 14%, 26%);
 }
 
 .circle.checked {
-    background: rgb(87,221,255);
-    background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%);
+    background: rgb(87, 221, 255);
+    background: linear-gradient(132deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%);
 }
 
-.check-icon{
+.check-icon {
     background-image: url(./images/icon-check.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -152,25 +144,6 @@ ul {
 .complete {
     text-decoration: line-through;
 }
-
-
-
-/* .todo-list li::before {
-    content: " ";
-    display: inline-block;
-    margin-right: 0.75rem;
-
-    width: 1.25rem;
-    height: 1.25rem;
-
-    border-radius: 50%;
-    border: solid 1px hsl(237, 14%, 26%);
-/* 
-    background: rgb(87,221,255);
-    background: linear-gradient(132deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%); */
-
-
-
 
 .remove-button {
     margin-left: auto;
@@ -183,7 +156,6 @@ ul {
 
 .list-footer {
     font-size: 0.813rem;
-    color: hsl(233, 14%, 35%);
 
     display: flex;
     justify-content: space-between;
@@ -195,8 +167,6 @@ ul {
 .list-footer button {
     background-color: transparent;
     border: none;
-
-    color: hsl(233, 14%, 35%);
 }
 
 
@@ -206,7 +176,6 @@ ul {
 /* SHOW STATUS */
 .show-status {
     padding: 1rem;
-    color: hsl(233, 14%, 35%);
 
     font-weight: 700;
 
@@ -217,7 +186,8 @@ ul {
 .show-status input {
     display: none;
 }
-.show-status input:checked + label{
+
+.show-status input:checked+label {
     color: hsl(220, 98%, 61%);
 }
 
@@ -231,12 +201,151 @@ ul {
 
 /* REORDER MESSAGE */
 
-.reorder-msg{
+.reorder-msg {
     margin-top: 3rem;
 
     text-align: center;
-    color: hsl(233, 14%, 35%);
     font-size: 0.813rem;
     font-weight: 700;
-    
+
+}
+
+
+
+
+
+
+/* Light Mode Styles */
+body.light {
+    background-image: url(./images/bg-mobile-light.jpg);
+    background-color: hsl(236, 33%, 92%);
+}
+
+body.light .container {
+    background-color: hsl(0, 0%, 98%);
+    box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.light .new-todo input {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light .new-todo::placeholder {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light .new-todo::before {
+    border: solid 1px hsl(233, 11%, 84%)
+}
+
+body.light ul {
+    border-bottom: 1px solid hsl(233, 11%, 84%);
+}
+
+body.light .todo-list li {
+    color: hsl(235, 19%, 35%);
+}
+
+body.light .todo-wrapper {
+    border-bottom: 1px solid hsl(233, 11%, 84%)
+}
+
+body.light .circle {
+    border: solid 1px hsl(233, 11%, 84%);
+}
+
+body.light .list-footer {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light .list-footer button {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light .show-status {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light .reorder-msg {
+    color: hsl(236, 9%, 61%);
+}
+
+body.light #noTodoMsg {
+    color: hsl(236, 9%, 61%);
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2)
+}
+
+body.light .todo-list .complete {
+    color: hsl(233, 11%, 84%);
+}
+
+
+
+
+
+
+/* Dark Mode Styles */
+body.dark {
+    background-image: url(./images/bg-mobile-dark.jpg);
+    ;
+    background-color: hsl(235, 21%, 11%);
+}
+
+body.dark .container {
+    background-color: hsl(235, 24%, 19%);
+    ;
+    box-shadow: 0px 10px 50px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .new-todo input {
+    color: hsl(234, 39%, 85%);
+}
+
+body.dark .new-todo::placeholder {
+    color: hsl(234, 39%, 85%);
+}
+
+body.dark .new-todo::before {
+    border: solid 1px hsl(237, 14%, 26%)
+}
+
+body.dark ul {
+    border-bottom: 1px solid hsl(237, 14%, 26%);
+}
+
+body.dark .todo-list li {
+    color: hsl(234, 39%, 85%);
+}
+
+body.dark .todo-wrapper {
+    border-bottom: 1px solid hsl(237, 14%, 26%)
+}
+
+body.dark .circle {
+    border: solid 1px hsl(237, 14%, 26%);
+}
+
+body.dark .list-footer {
+    color: hsl(233, 14%, 35%);
+}
+
+body.dark .list-footer button {
+    color: hsl(233, 14%, 35%);
+}
+
+body.dark .show-status {
+    color: hsl(233, 14%, 35%);
+}
+
+body.dark .reorder-msg {
+    color: hsl(233, 14%, 35%);
+}
+
+body.dark #noTodoMsg {
+    color: hsl(235, 19%, 35%);
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .todo-list .complete {
+    color: hsl(234, 11%, 52%);
 }

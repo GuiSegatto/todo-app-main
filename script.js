@@ -209,9 +209,25 @@ const clearBtn = document.getElementById("clearBtn")
 clearBtn.addEventListener('click', function () {
     check = window.confirm("Are you sure you wanna clear your completed todos?");
     if (check === true)
-    for (let i = total.length -1; i >= 0; i--) {
-        if (total[i].classList.contains('complete')){
-        total[i].parentNode.remove()        
+        for (let i = total.length - 1; i >= 0; i--) {
+            if (total[i].classList.contains('complete')) {
+                total[i].parentNode.remove();
+            }
         }
-    }
 })
+
+let lightDarkButton = document.getElementById('lightDarkMode');
+let body = document.querySelector('body');
+lightDarkButton.addEventListener('click', toggleMode);
+
+function toggleMode() {
+    if (body.classList.contains('light')) {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        lightDarkButton.src = ("./images/icon-sun.svg");
+    } else if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        lightDarkButton.src = ("./images/icon-moon.svg");
+    }
+}
