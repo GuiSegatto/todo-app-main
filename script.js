@@ -1,233 +1,232 @@
-// Global Selectors
-const ul = document.getElementById("todoList");
-const li = document.querySelectorAll('li');
-const removeBtn = document.getElementsByClassName("remove-button");
+const list = document.getElementById("todoList");
+const items = document.getElementsByTagName('li');
+const textInput = document.getElementById('newItem');
+const completed = document.getElementById("todoList").getElementsByClassName("complete")
+const total = document.getElementById("todoList").getElementsByTagName("li")
+const itemsLeft = document.getElementById('itemsLeft')
+const emptyMessage = document.getElementById("noTodoMsg")
+const messageContainer = document.querySelector(".msg-container")
+const statusNav = document.querySelector('#status')
+const clearButton = document.getElementById("clearBtn")
+const nightModeButton = document.getElementById('lightDarkMode');
+const body = document.querySelector('body');
 
-// Create a close button for each item in the list
-
-for (i = 0; i < li.length; i++) {
-    let crossIcon = document.createElement("img");
-    crossIcon.src = "./images/icon-cross.svg";
-    crossIcon.className = "remove-button";
-    li[i].appendChild(crossIcon);
-}
-
-// Click on close button to remove the element from the list
-for (i = 0; i < removeBtn.length; i++) {
-    removeBtn[i].onclick = function () {
-        let todo = this.parentElement;
-        let wrapper = todo.parentElement;
-        wrapper.remove();
-        updateItems()
-    }
-}
-
-// Create the check circle before the todo name
-for (i = 0; i < li.length; i++) {
-    let circle = document.createElement("div")
-    circle.classList.add("circle")
-    let wrapper = li[i].parentElement
-    wrapper.insertBefore(circle, wrapper.firstChild)
-
-}
+// Values
+const EMPTY_STRING = ''
+const EMPTY = 0
+const ITEM_TEXT = 'LI'
+const REMOVE_BUTTON = 'IMG'
+const CLASS_COMPLETED = 'complete'
+const CIRCLE = '0'
+const CHECKED_ICON = 'div'
+const WRAPPER = '0'
+const ICON = '0'
+const TODO_TEXT = '1'
 
 
+// Locations
+const CHECKBOX = 'circle'
+const ACTIVE_CHECKBOX = 'check-icon'
 
-// When press "enter" inside input execute newtodo function
+// classes
+const todoWrapper = 'todo-wrapper'
+const CLASS_CIRCLE = 'circle'
+const removeButton = 'remove-button'
+const BACKGROUND = 'checked'
+const CLASS_CHECK_ICON = 'check-icon'
+const CLASS_HIDE = 'hide'
+const CLASS_LIGHT = 'light'
+const CLASS_DARK = 'dark'
+
+
+
+
+// When press "enter" inside input execute 
 document.getElementById('newItem').onkeydown = function (e) {
     if (!e) e = window.event;
     var keyCode = e.code || e.key;
     if (keyCode == 'Enter' || keyCode == 'NumpadEnter') {
-        newTodo();
-        return false;
+        createNewTodo();
     }
 }
 
 
 // Create a new item and add it to the list
-function newTodo() {
-    let li = document.createElement("li")
-    let wrapper = document.createElement("div")
-    wrapper.classList.add('todo-wrapper')
+function createNewTodo() {
+    const newItem = document.createElement("li")
+    const newWrapper = document.createElement("div")
+    let newTodoText = document.createTextNode(textInput.value);
+    newWrapper.classList.add(todoWrapper)
+
+    newItem.appendChild(newTodoText);
 
 
-    let inputValue = document.getElementById('newItem').value;
-
-    let todo = document.createTextNode(inputValue);
-    li.appendChild(todo);
-    if (inputValue === '') {
+    if (textInput.value.length === EMPTY) {
         alert("You must write something!");
+        return;
     } else {
-        ul.appendChild(wrapper)
-        wrapper.appendChild(li)
+        newWrapper.appendChild(newItem)
+        list.appendChild(newWrapper)
     }
-    document.getElementById("newItem").value = "";
 
-    // Create the check circle before the todo
-    let circle = document.createElement("div")
-    circle.classList.add("circle")
-    wrapper.insertBefore(circle, wrapper.firstChild)
+    textInput.value = EMPTY_STRING;
 
+    // Create the check circle before the todo item
+    const newCheckBox = document.createElement("div")
+    newCheckBox.classList.add(CLASS_CIRCLE)
+    newWrapper.insertBefore(newCheckBox, newWrapper.firstChild)
 
+    // Create close button and add it to the todo item
+    const newRemoveButton = document.createElement("img");
+    newRemoveButton.src = "./images/icon-cross.svg";
+    newRemoveButton.className = removeButton;
+    newItem.appendChild(newRemoveButton);
+    const buttonList = document.getElementsByClassName(removeButton);
 
-
-    // Create close button
-    let crossIcon = document.createElement("img");
-    crossIcon.src = "./images/icon-cross.svg";
-    crossIcon.className = "remove-button";
-    li.appendChild(crossIcon);
-
-    for (i = 0; i < removeBtn.length; i++) {
-        removeBtn[i].onclick = function () {
+    for (i = 0; i < buttonList.length; i++) {
+        buttonList[i].onclick = function () {
             let todo = this.parentElement;
             let wrapper = todo.parentElement;
             wrapper.remove();
-            updateItems()
+            // updateItems()
         }
     }
-    updateItems()
+
+    updateItemsLeft()
 }
-
-
-// Click on close button to remove the element from the list
-
 
 
 // Set the item as complete
-ul.addEventListener('click', function (event) {
-    if (event.target.tagName === "LI" && event.target.tagName !== "img") {
-        event.target.classList.toggle('complete');
+list.addEventListener('click', function (event) {
+    let wrapper = event.target.parentNode;
 
-        let wrapper = event.target.parentNode;
-        wrapper.childNodes[0].classList.toggle('checked');
+    if (event.target.tagName === ITEM_TEXT && event.target.tagName !== REMOVE_BUTTON) {
+        event.target.classList.toggle(CLASS_COMPLETED);
 
-        let checkIcon = document.createElement('div');
-        checkIcon.classList.add('check-icon');
+        wrapper.childNodes[CIRCLE].classList.toggle(BACKGROUND);
 
-        toggleIcon()
-        function toggleIcon() {
-            if (event.target.classList.contains('complete')) {
-                wrapper.childNodes[0].appendChild(checkIcon);
-            } else {
-                let icon = wrapper.childNodes[0].childNodes[0];
-                wrapper.childNodes[0].removeChild(icon);
-            }
+        let checkIcon = createIcon()
+
+
+        if (event.target.classList.contains(CLASS_COMPLETED)) {
+            wrapper.childNodes[CIRCLE].appendChild(checkIcon);
+        } else {
+            let icon = wrapper.childNodes[CIRCLE].childNodes[ICON];
+            wrapper.childNodes[CIRCLE].removeChild(icon);
         }
-        updateItems()
     }
 
-    else if (event.target.classList.contains("circle")) {
-        event.target.classList.toggle('checked');
-        let wrapper = event.target.parentNode;
-        wrapper.childNodes[1].classList.toggle('complete');
-        let checkIcon = document.createElement('div');
-        checkIcon.classList.add('check-icon')
-        wrapper.childNodes[0].appendChild(checkIcon)
-        updateItems()
+    else if (event.target.classList.contains(CHECKBOX)) {
+        let checkIcon = createIcon()
+
+        event.target.classList.toggle(BACKGROUND);
+        wrapper.childNodes[TODO_TEXT].classList.toggle(CLASS_COMPLETED);
+        wrapper.childNodes[CIRCLE].appendChild(checkIcon)
     }
 
-    else if (event.target.classList.contains("check-icon")) {
+    else if (event.target.classList.contains(ACTIVE_CHECKBOX)) {
         let circle = event.target.parentNode;
+        circle.classList.toggle(BACKGROUND)
+
         let wrapper = circle.parentNode;
-        wrapper.childNodes[1].classList.toggle('complete')
-        circle.classList.toggle('checked')
-        let icon = wrapper.childNodes[0].childNodes[0]
-        wrapper.childNodes[0].removeChild(icon)
-        updateItems()
+        wrapper.childNodes[TODO_TEXT].classList.toggle(CLASS_COMPLETED)
+
+
+        let icon = wrapper.childNodes[CIRCLE].childNodes[ICON]
+        wrapper.childNodes[CIRCLE].removeChild(icon)
     }
 
+    function createIcon() {
+        let checkIcon = document.createElement(CHECKED_ICON);
+        checkIcon.classList.add(CLASS_CHECK_ICON);
+        return checkIcon
+    }
 
-
+    updateItemsLeft()
 });
 
+function updateItemsLeft() {
+    const HIDE_MESSAGE = "none"
+    const SHOW_MESSAGE = "flex"
+    const HIDE_BORDER = '0'
+    const SHOW_BORDER = 'style'
+    const MINIMUM_SIZE = 1
+    const MAXIMUM_SIZE = 6
+    const EMPTY = 0
 
-// Count how many items on the list are left
-const completed = document.getElementById("todoList").getElementsByClassName("complete")
-const total = document.getElementById("todoList").getElementsByTagName("li")
+    if (items.length >= MINIMUM_SIZE && items.length < MAXIMUM_SIZE) {
+        contentToggle(HIDE_MESSAGE, SHOW_BORDER)
 
-function countItemsLeft() {
-    left = total.length - completed.length
-    return left
-}
-
-function updateItems() {
-    let itemsLeft = document.getElementById('itemsLeft')
-    itemsLeft.innerText = countItemsLeft()
-    countTodo()
-}
-updateItems()
-
-// Looks like you have no todo on your list message
-function countTodo() {
-    let message = document.getElementById("noTodoMsg")
-    let container = document.querySelector(".msg-container")
-    if (total.length >= 1 && total.length !== 6) {
-        container.style.display = "none"
-        ul.removeAttribute("style")
-    } else if (total.length === 6) {
-        container.style.display = "none"
-        ul.style.border = "0"
+    } else if (items.length === EMPTY) {
+        emptyMessage.innerText = "Looks like your To Do List is Empty..."
+        contentToggle(SHOW_MESSAGE, SHOW_BORDER)
     }
     else {
-        container.style.display = "flex"
-        message.innerText = "Looks like your To Do List is Empty..."
-        ul.removeAttribute("style")
+        contentToggle(HIDE_MESSAGE, HIDE_BORDER)
     }
+
+    function contentToggle(message, border) {
+        messageContainer.style.display = message
+        if (border === SHOW_BORDER)
+            list.removeAttribute(border)
+        else if (border === HIDE_BORDER) {
+            list.style.border = border;
+        }
+    }
+
+    itemsLeft.innerText = items.length - completed.length
 }
 
 // Navigation in footer
-const statusDiv = document.querySelector('#status')
-statusDiv.addEventListener('change', function () {
-    let value = document.querySelector('input[name="status"]:checked').value;
-    if (value === 'completed') {
-        for (const items of total) {
-            let wrapper = items.parentNode
-            wrapper.classList.remove('hide')
-            if (!items.classList.contains('complete')) {
-                wrapper.classList.add('hide')
+statusNav.addEventListener('change', function () {
+    let selectedValue = document.querySelector('input[name="status"]:checked').value;
+
+    for (const item of items) {
+        let wrapper = item.parentNode
+        if (selectedValue === 'completed') {
+            wrapper.classList.remove(CLASS_HIDE)
+            if (!item.classList.contains(CLASS_COMPLETED)) {
+                wrapper.classList.add(CLASS_HIDE)
             }
+
         }
-    }
-    else if (value === 'active') {
-        for (const items of total) {
-            let wrapper = items.parentNode
-            wrapper.classList.remove('hide')
-            if (items.classList.contains('complete')) {
-                wrapper.classList.add('hide')
+        else if (selectedValue === 'active') {
+            wrapper.classList.remove(CLASS_HIDE)
+            if (item.classList.contains(CLASS_COMPLETED)) {
+                wrapper.classList.add(CLASS_HIDE)
+
             }
-        }
-    } else {
-        for (const items of total) {
-            let wrapper = items.parentNode
-            wrapper.classList.remove('hide')
+        } else {
+            wrapper.classList.remove(CLASS_HIDE)
         }
     }
 })
 
 // Clear all todos button
-const clearBtn = document.getElementById("clearBtn")
-clearBtn.addEventListener('click', function () {
-    check = window.confirm("Are you sure you wanna clear your completed todos?");
-    if (check === true)
-        for (let i = total.length - 1; i >= 0; i--) {
-            if (total[i].classList.contains('complete')) {
-                total[i].parentNode.remove();
+clearButton.addEventListener('click', function () {
+    areYouSure = window.confirm("Are you sure you wanna clear your completed todos?");
+    if (areYouSure === true)
+        for (let i = items.length - 1; i >= 0; i--) {
+            if (items[i].classList.contains(CLASS_COMPLETED)) {
+                items[i].parentNode.remove();
             }
         }
 })
 
-let lightDarkButton = document.getElementById('lightDarkMode');
-let body = document.querySelector('body');
-lightDarkButton.addEventListener('click', toggleMode);
+// Light And Dark Mode
+nightModeButton.addEventListener('click', toggleMode);
 
 function toggleMode() {
-    if (body.classList.contains('light')) {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        lightDarkButton.src = ("./images/icon-sun.svg");
-    } else if (body.classList.contains('dark')) {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        lightDarkButton.src = ("./images/icon-moon.svg");
+    if (body.classList.contains(CLASS_LIGHT)) {
+        body.classList.remove(CLASS_LIGHT);
+        body.classList.add(CLASS_DARK);
+        nightModeButton.src = ("./images/icon-sun.svg");
+    } else if (body.classList.contains(CLASS_DARK)) {
+        body.classList.remove(CLASS_DARK);
+        body.classList.add(CLASS_LIGHT);
+        nightModeButton.src = ("./images/icon-moon.svg");
     }
 }
+
+
+updateItemsLeft()
