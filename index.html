@@ -29,25 +29,42 @@
       <ul class="todo-list" id="todoList">
         <div class="msg-container"><span id="noTodoMsg"></span></div>
       </ul>
+    </div>
+  </main>
 
-      <div class="list-footer">
-        <p><span id="itemsLeft">0</span> items left</p>
-        <button id="clearBtn">Clear Completed</button>
-      </div>
+  <footer>
+    <div class="list-footer container mobile-footer">
+      <p><span id="itemsLeft">0</span> items left</p>
+      <button id="clearBtn">Clear Completed</button>
     </div>
 
-    <div class="show-status container" id="status">
+    <nav class="show-status container mobile-footer" id="status">
       <input type="radio" name="status" id="showAll" value="all" checked>
       <label for="showAll">All</label>
       <input type="radio" name="status" id="showActive" value="active">
       <label for="showActive">Active</label>
       <input type="radio" name="status" id="showCompleted" value="completed">
       <label for="showCompleted">Completed</label>
+    </nav>
+
+    <div class="show-status container desktop-footer" id="status">
+      <p><span id="itemsLeft">0</span> items left</p>
+      <nav>
+        <input type="radio" name="status" id="showAll" value="all" checked>
+        <label for="showAll">All</label>
+        <input type="radio" name="status" id="showActive" value="active">
+        <label for="showActive">Active</label>
+        <input type="radio" name="status" id="showCompleted" value="completed">
+        <label for="showCompleted">Completed</label>
+      </nav>
+      <button id="clearBtn">Clear Completed</button>
     </div>
+
+    </nav>
 
     <p class="reorder-msg">Drag and Drop to reorder list</p>
 
-  </main>
+  </footer>
 </body>
 
 </html>

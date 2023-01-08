@@ -29,7 +29,7 @@ const CHECKBOX = 'circle'
 const ACTIVE_CHECKBOX = 'check-icon'
 
 // classes
-const todoWrapper = 'todo-wrapper'
+const CLASS_WRAPPER = 'todo-wrapper'
 const CLASS_CIRCLE = 'circle'
 const removeButton = 'remove-button'
 const BACKGROUND = 'checked'
@@ -56,7 +56,7 @@ function createNewTodo() {
     const newItem = document.createElement("li")
     const newWrapper = document.createElement("div")
     let newTodoText = document.createTextNode(textInput.value);
-    newWrapper.classList.add(todoWrapper)
+    newWrapper.classList.add(CLASS_WRAPPER)
 
     newItem.appendChild(newTodoText);
 
