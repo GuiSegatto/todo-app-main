@@ -174,14 +174,14 @@ ul {
     border-radius: 0 0px 5px 5px;
 }
 
-#clearBtn {
+.clear-button {
     background-color: transparent;
     border: none;
     font-size: 0.813rem;
     transition: 0.2s;
 }
 
-#status.desktop-footer {
+.show-status.desktop-footer {
     display: none;
     border-radius: 0 0 5px 5px;
     font-size: 0.813rem;
@@ -274,7 +274,7 @@ body.light .list-footer {
     color: hsl(236, 9%, 61%);
 }
 
-body.light #clearBtn {
+body.light .clear-button {
     color: hsl(236, 9%, 61%);
 }
 
@@ -345,7 +345,7 @@ body.dark .list-footer {
     color: hsl(233, 14%, 35%);
 }
 
-body.dark #clearBtn {
+body.dark .clear-button {
     color: hsl(233, 14%, 35%);
 }
 
@@ -420,17 +420,17 @@ body.dark .todo-list .complete {
         display: none;
     }
 
-    #status.desktop-footer {
+    .show-status.desktop-footer {
         display: flex;
         justify-content: space-between;
     }
 
     
-    #status.desktop-footer p {
+    .show-status.desktop-footer p {
         font-weight: 400;
     }
 
-    #status label {
+    .show-status label {
         cursor: pointer;
     }
 
@@ -446,12 +446,12 @@ body.dark .todo-list .complete {
         color: hsl(235, 19%, 35%);
     }
 
-    body.dark #clearBtn:hover {
+    body.dark .clear-button:hover {
         color: hsl(236, 33%, 92%);
         cursor: pointer;
     }
 
-        body.light #clearBtn:hover {
+        body.light .clear-button:hover {
         color: hsl(235, 19%, 35%);
         cursor: pointer;
     }
@@ -461,11 +461,11 @@ body.dark .todo-list .complete {
     }
 
     .todo-wrapper img.remove-button {
-        display: none;
+        visibility: hidden;
     }
 
     .todo-wrapper:hover img.remove-button {
-        display: block;
+        visibility: visible;
     }
 
 
