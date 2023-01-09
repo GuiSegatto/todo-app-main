@@ -3,8 +3,6 @@
 - Essa é a minha solução para o desafio ["Todo app" do Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 <br><br>
 
-# Geral
-
 ## O objetivo do Desafio:
 - O ojetivo do desafio é copiar o layout e fazer as funcionalidades do app com as imagens que o [desafio](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW) fornece.
 <br>
