@@ -1,5 +1,6 @@
 const list = document.getElementById("todoList");
 const items = document.getElementsByTagName('li');
+const draggableItem = document.querySelectorAll('li')
 const textInput = document.getElementById('newItem');
 const completed = document.getElementById("todoList").getElementsByClassName("complete")
 const total = document.getElementById("todoList").getElementsByTagName("li")
@@ -37,6 +38,7 @@ const CLASS_CHECK_ICON = 'check-icon'
 const CLASS_HIDE = 'hide'
 const CLASS_LIGHT = 'light'
 const CLASS_DARK = 'dark'
+const CLASS_DRAGGING = 'dragging'
 
 
 
@@ -230,5 +232,40 @@ function toggleMode() {
     }
 }
 
+// Drag and Drop
+document.addEventListener("dragstart", (e) => {
+    let emptyImg = new Image()
+    e.dataTransfer.setDragImage(emptyImg, 0, 0)
+    e.target.classList.add(CLASS_DRAGGING);
+});
+
+document.addEventListener("dragend", (e) => {
+    e.target.classList.remove(CLASS_DRAGGING);
+});
+
+list.addEventListener("dragover", (e) =>{     
+        e.preventDefault()
+        const draggingElement = document.querySelector('.'+CLASS_DRAGGING);
+        const applyAfter = getNewPosition(e.clientY) 
+
+        if (applyAfter) {
+            applyAfter.insertAdjacentElement("afterend", draggingElement);
+        }
+        else {
+            list.prepend(draggingElement)
+        }
+});
+
+function getNewPosition (posY) {
+    const items = list.querySelectorAll(".todo-wrapper:not(.dragging)");
+    let result;
+    
+    for (let item of items) {
+        const container = item.getBoundingClientRect();
+        const containerCenterY = container.y + container.height / 2;
+        if (posY >= containerCenterY) result = item;
+    }
+    return result;
+}
 
 updateItemsLeft()

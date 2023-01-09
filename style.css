@@ -20,6 +20,11 @@ body {
     border-radius: 5px;
 }
 
+#todoList .todo-wrapper.dragging {
+    border: 2px dashed hsl(220, 98%, 61%);
+    cursor: pointer;
+}
+
 
 /* HEADER STYLES  */
 header {
@@ -118,6 +123,7 @@ ul {
     align-items: center;
     padding: 0 1rem;
     overflow-wrap: anywhere;
+    user-select: none;
 }
 
 .todo-wrapper.hide {
