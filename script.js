@@ -4,11 +4,11 @@ const draggableItem = document.querySelectorAll('li')
 const textInput = document.getElementById('newItem');
 const completed = document.getElementById("todoList").getElementsByClassName("complete")
 const total = document.getElementById("todoList").getElementsByTagName("li")
-const itemsLeft = document.getElementById('itemsLeft')
+const itemsLeft = document.querySelectorAll('.items-left')
 const emptyMessage = document.getElementById("noTodoMsg")
 const messageContainer = document.querySelector(".msg-container")
 const statusNav = document.querySelectorAll('nav')
-const clearButton = document.getElementById("clearBtn")
+const clearButton = document.querySelectorAll(".clear-button")
 const nightModeButton = document.getElementById('lightDarkMode');
 const body = document.querySelector('body');
 
@@ -59,9 +59,7 @@ function createNewTodo() {
     const newWrapper = document.createElement("div")
     let newTodoText = document.createTextNode(textInput.value);
     newWrapper.classList.add(CLASS_WRAPPER)
-
     newItem.appendChild(newTodoText);
-
 
     if (textInput.value.length === EMPTY) {
         alert("You must write something!");
@@ -70,32 +68,41 @@ function createNewTodo() {
         newWrapper.appendChild(newItem)
         list.appendChild(newWrapper)
     }
-
     textInput.value = EMPTY_STRING;
 
-    // Create the check circle before the todo item
+    addCheckCircle(newWrapper);
+    addRemoveButton(newItem);
+    getRemoveButtons();
+    updateItemsLeft()
+}
+
+function addCheckCircle(newWrapper) {
     const newCheckBox = document.createElement("div")
     newCheckBox.classList.add(CLASS_CIRCLE)
     newWrapper.insertBefore(newCheckBox, newWrapper.firstChild)
+}
 
-    // Create close button and add it to the todo item
+function addRemoveButton(newItem) {
     const newRemoveButton = document.createElement("img");
     newRemoveButton.src = "./images/icon-cross.svg";
     newRemoveButton.className = removeButton;
     newItem.appendChild(newRemoveButton);
-    const buttonList = document.getElementsByClassName(removeButton);
+}
 
+function getRemoveButtons() {
+    const buttonList = document.getElementsByClassName(removeButton);
     for (i = 0; i < buttonList.length; i++) {
         buttonList[i].onclick = function () {
-            let todo = this.parentElement;
-            let wrapper = todo.parentElement;
-            wrapper.remove();
-            // updateItems()
+            removeTodo(this)
         }
     }
+};
 
-    updateItemsLeft()
-}
+function removeTodo(item) {
+    let wrapper = item.parentElement.parentElement;
+    wrapper.remove();
+};
+
 
 
 // Set the item as complete
@@ -145,7 +152,7 @@ list.addEventListener('click', function (event) {
     }
 
     updateItemsLeft()
-    updateNav ()
+    updateNav()
 });
 
 function updateItemsLeft() {
@@ -177,13 +184,15 @@ function updateItemsLeft() {
         }
     }
 
-    itemsLeft.innerText = items.length - completed.length
+    itemsLeft.forEach(item => {
+        item.innerText = items.length - completed.length
+    })
 }
 
 // Navigation in footer
 statusNav.forEach(item => { item.addEventListener('change', updateNav)})
 
-function updateNav () {
+function updateNav() {
     let selectedValue = document.querySelector('input[name="status"]:checked').value;
     for (const item of items) {
         let wrapper = item.parentNode
@@ -207,7 +216,9 @@ function updateNav () {
 }
 
 // Clear all todos button
-clearButton.addEventListener('click', function () {
+clearButton.forEach(item => { item.addEventListener('click', clearAll)})
+
+function clearAll() {
     areYouSure = window.confirm("Are you sure you wanna clear your completed todos?");
     if (areYouSure === true)
         for (let i = items.length - 1; i >= 0; i--) {
@@ -215,7 +226,8 @@ clearButton.addEventListener('click', function () {
                 items[i].parentNode.remove();
             }
         }
-})
+}
+
 
 // Light And Dark Mode
 nightModeButton.addEventListener('click', toggleMode);
@@ -233,39 +245,44 @@ function toggleMode() {
 }
 
 // Drag and Drop
-document.addEventListener("dragstart", (e) => {
+list.addEventListener("dragover", dragOver)
+document.addEventListener("dragstart", dragStarted)
+document.addEventListener("dragend", dragEnded)
+
+function dragStarted(e) {
     let emptyImg = new Image()
     e.dataTransfer.setDragImage(emptyImg, 0, 0)
     e.target.classList.add(CLASS_DRAGGING);
-});
+};
 
-document.addEventListener("dragend", (e) => {
+function dragEnded(e) {
     e.target.classList.remove(CLASS_DRAGGING);
-});
+};
 
-list.addEventListener("dragover", (e) =>{     
-        e.preventDefault()
-        const draggingElement = document.querySelector('.'+CLASS_DRAGGING);
-        const applyAfter = getNewPosition(e.clientY) 
+function dragOver(e) {
+    e.preventDefault()
+    const draggingElement = document.querySelector('.' + CLASS_DRAGGING);
+    const applyAfter = getNewPosition(e.clientY)
 
-        if (applyAfter) {
-            applyAfter.insertAdjacentElement("afterend", draggingElement);
-        }
-        else {
-            list.prepend(draggingElement)
-        }
-});
+    if (applyAfter) {
+        applyAfter.insertAdjacentElement("afterend", draggingElement);
+    }
+    else {
+        list.prepend(draggingElement)
+    }
+};
 
-function getNewPosition (posY) {
+function getNewPosition(posY) {
     const items = list.querySelectorAll(".todo-wrapper:not(.dragging)");
     let result;
-    
+
     for (let item of items) {
         const container = item.getBoundingClientRect();
         const containerCenterY = container.y + container.height / 2;
         if (posY >= containerCenterY) result = item;
     }
     return result;
-}
+};
 
 updateItemsLeft()
+getRemoveButtons() 
