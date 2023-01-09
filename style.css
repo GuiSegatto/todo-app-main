@@ -127,7 +127,7 @@ ul {
 .circle {
     width: 1.5rem;
     height: 1.4rem;
-    border-radius: 50%;
+    border-radius: 50rem;
 }
 
 .circle.checked {
@@ -172,6 +172,7 @@ ul {
     background-color: transparent;
     border: none;
     font-size: 0.813rem;
+    transition: 0.2s;
 }
 
 #status.desktop-footer {
@@ -236,7 +237,7 @@ body.light .container {
 }
 
 body.light .new-todo input {
-    color: hsl(236, 9%, 61%);
+    color: hsl(235, 19%, 35%);
 }
 
 body.light .new-todo::placeholder {
@@ -244,7 +245,7 @@ body.light .new-todo::placeholder {
 }
 
 body.light .new-todo::before {
-    border: solid 1px hsl(233, 11%, 84%)
+    border: solid 1px hsl(233, 11%, 84%);
 }
 
 body.light ul {
@@ -393,6 +394,7 @@ body.dark .todo-list .complete {
 @media only screen and (min-width: 960px) {
     body {
         margin: 2.5rem 27vw;
+        transition: 0.2s ease-in;
     }
 
     body.dark {
@@ -403,6 +405,11 @@ body.dark .todo-list .complete {
         background-size: 100vw;
     }
 
+    header img {
+        cursor: pointer;
+    }
+    
+
     .mobile-footer {
         display: none;
     }
@@ -412,9 +419,77 @@ body.dark .todo-list .complete {
         justify-content: space-between;
     }
 
+    
     #status.desktop-footer p {
         font-weight: 400;
     }
+
+    #status label {
+        cursor: pointer;
+    }
+
+    .desktop-footer input:checked+label {
+        color: hsl(220, 98%, 61%);
+    }
+
+    body.dark .desktop-footer label:hover {
+        color: hsl(236, 33%, 92%);
+    }
+
+    body.light .desktop-footer label:hover {
+        color: hsl(235, 19%, 35%);
+    }
+
+    body.dark #clearBtn:hover {
+        color: hsl(236, 33%, 92%);
+        cursor: pointer;
+    }
+
+        body.light #clearBtn:hover {
+        color: hsl(235, 19%, 35%);
+        cursor: pointer;
+    }
+    
+    div.todo-wrapper {
+        cursor: pointer;
+    }
+
+    .todo-wrapper img.remove-button {
+        display: none;
+    }
+
+    .todo-wrapper:hover img.remove-button {
+        display: block;
+    }
+
+
+
+    body.dark div.todo-wrapper:hover .circle {
+        background: linear-gradient(hsl(235, 24%, 19%), hsl(235, 24%, 19%)) padding-box,
+            linear-gradient(132deg, rgba(87, 221, 255, 1), rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%) border-box;
+        border-radius: 50rem;
+        border: 1px solid transparent;
+        transition: 0.4s;
+    }
+
+    body.light div.todo-wrapper:hover .circle {
+        background: linear-gradient(hsl(0, 0%, 98%), hsl(0, 0%, 98%)) padding-box,
+            linear-gradient(132deg, rgba(87, 221, 255, 1), rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%) border-box;
+        border-radius: 50rem;
+        border: 1px solid transparent;
+        transition: 0.4s;
+    }
+
+    
+    body.dark div.todo-wrapper:hover .checked, body.light div.todo-wrapper:hover .checked {
+        background: linear-gradient(132deg, rgba(87, 221, 255, 1), rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%) padding-box,
+            linear-gradient(132deg, rgba(87, 221, 255, 1), rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%) border-box;
+        border-radius: 50rem;
+        border: 1px solid transparent;
+        transition: 0.4s;
+    }
+
+
 }
 
 @media only screen and (min-width: 1060px) {
@@ -436,6 +511,7 @@ body.dark .todo-list .complete {
     html {
         font-size: 1.125rem;
     }
+
     body {
         margin: 3.25rem 31vw;
     }

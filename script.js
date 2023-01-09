@@ -6,7 +6,7 @@ const total = document.getElementById("todoList").getElementsByTagName("li")
 const itemsLeft = document.getElementById('itemsLeft')
 const emptyMessage = document.getElementById("noTodoMsg")
 const messageContainer = document.querySelector(".msg-container")
-const statusNav = document.querySelector('#status')
+const statusNav = document.querySelectorAll('nav')
 const clearButton = document.getElementById("clearBtn")
 const nightModeButton = document.getElementById('lightDarkMode');
 const body = document.querySelector('body');
@@ -143,6 +143,7 @@ list.addEventListener('click', function (event) {
     }
 
     updateItemsLeft()
+    updateNav ()
 });
 
 function updateItemsLeft() {
@@ -178,9 +179,10 @@ function updateItemsLeft() {
 }
 
 // Navigation in footer
-statusNav.addEventListener('change', function () {
-    let selectedValue = document.querySelector('input[name="status"]:checked').value;
+statusNav.forEach(item => { item.addEventListener('change', updateNav)})
 
+function updateNav () {
+    let selectedValue = document.querySelector('input[name="status"]:checked').value;
     for (const item of items) {
         let wrapper = item.parentNode
         if (selectedValue === 'completed') {
@@ -200,7 +202,7 @@ statusNav.addEventListener('change', function () {
             wrapper.classList.remove(CLASS_HIDE)
         }
     }
-})
+}
 
 // Clear all todos button
 clearButton.addEventListener('click', function () {
